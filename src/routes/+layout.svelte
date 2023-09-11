@@ -46,7 +46,7 @@
   }
 
   section.heading {
-    padding: 2 * $spacing 0;
+    padding-bottom: 2 * $spacing;
   }
 
   section.content {
