@@ -40,13 +40,10 @@
   main {
     display: flex;
     flex-direction: column;
+    gap: 2 * $spacing;
     height: 100%;
     padding: $spacing;
     width: 100%;
-  }
-
-  section.heading {
-    padding-bottom: 2 * $spacing;
   }
 
   section.content {
