@@ -1,0 +1,54 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+    branches:
+      - 'main'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Prepare things
+        id: prepare
+        run: |
+          pnpm install
+
+      - name: Build
+        run: |
+          pnpm run build
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        run: |
+          git config --global user.name "GitHub"
+          git config --global user.email "<noreply@github.com>"
+
+          SRC="$(pwd)"
+
+          mkdir /tmp/github-pages
+          cp CNAME /tmp/github-pages
+          cd /tmp/github-pages
+
+          git init . && git checkout --orphan "${BRANCH}"
+          cp -r "${SRC}/${DEPLOY_DIR}"/* .
+
+          git add . && git status && git commit --message "${MESSAGE}"
+          git push -f -q "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${BRANCH}"
+        env:
+          DEPLOY_DIR: build
+          MESSAGE: Deploy to GitHub Pages
+          BRANCH: gh-pages
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

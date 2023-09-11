@@ -1,0 +1,39 @@
+{
+	"extends": "stylelint-config-recommended-scss",
+	"plugins": ["stylelint-order"],
+	"rules": {
+		"order/properties-alphabetical-order": true,
+		"declaration-empty-line-before": "never",
+		"rule-empty-line-before": [
+			"always",
+			{
+				"except": ["after-single-line-comment"],
+				"ignore": ["first-nested"]
+			}
+		],
+		"font-family-name-quotes": "always-where-required",
+		"function-url-no-scheme-relative": true,
+		"function-url-quotes": "always",
+		"value-keyword-case": "lower",
+		"unit-disallowed-list": ["em"],
+		"no-descending-specificity": true,
+		"no-duplicate-selectors": true,
+		"font-family-no-missing-generic-family-keyword": true,
+		"property-no-unknown": [
+			true,
+			{
+				"ignoreProperties": ["/^lost-/"]
+			}
+		],
+		"selector-pseudo-class-no-unknown": [
+			true,
+			{
+				"ignorePseudoClasses": ["global"]
+			}
+		]
+	},
+
+	"ignoreFiles": ["node_modules/*", "build/**", "src/old/**"],
+	"defaultSeverity": "error",
+	"customSyntax": "postcss-html"
+}
