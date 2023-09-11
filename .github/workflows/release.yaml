@@ -42,6 +42,8 @@ jobs:
           cp CNAME /tmp/github-pages
           cd /tmp/github-pages
 
+          touch .nojekyll
+
           git init . && git checkout --orphan "${BRANCH}"
           cp -r "${SRC}/${DEPLOY_DIR}"/* .
 
