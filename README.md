@@ -6,6 +6,14 @@ Simple port knocking tool that just sends requests from your browser, statically
 
 ## Development
 
-```shell
+You will need:
 
+- [pre-commit](https://pre-commit.com/#install)
+- [Node.js 18+](https://nodejs.org/en/download)
+- [PNPM](https://pnpm.io/installation)
+
+```shell
+pre-commit install
+pnpm install
+pnpm run dev
 ```
